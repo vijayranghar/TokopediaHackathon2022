@@ -1,16 +1,16 @@
-import React from 'react'
-import { Switch, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import MemoryGame from './pages/MemoryGame';
-import Game2 from './pages/AryselGame';
+import ProtectEggGame from './pages/ProtectEggGame';
+import React from 'react'
 
 function ErrorGame({ match }) {
   return (
     <Switch>
       <Route path={`${match.path}/1`} exact component={MemoryGame} /> 
-      <Route path={`${match.path}/2`} exact component={Game2} />
+      <Route path={`${match.path}/2`} exact component={ProtectEggGame} />
     </Switch>
   )
 }
 
-export default ErrorGame
+export default ErrorGame;

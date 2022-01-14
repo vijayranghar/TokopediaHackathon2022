@@ -1,0 +1,13 @@
+body {
+  background: #1e1e1e;
+}
+
+.protectEggGameWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#game-canvas {
+  align-items: center;
+  touch-action: manipulation;
+}
