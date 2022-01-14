@@ -131,7 +131,7 @@ const ProtectEggGame = () => {
       }
 
       const pos = generatePosition();
-      const enemy = new Enemy(ctx, pos.x, pos.y, 18);
+      const enemy = new Enemy(ctx, pos.x, pos.y, 21);
       enemy.setTag('enemy').setData('active', true);
       enemy.setData('speed', 0.35).setSprite(imageManager.get('piko-sus'));
 
@@ -221,14 +221,72 @@ const ProtectEggGame = () => {
     gameObjects.forEach(go => go.render(deltaTime));
   };
 
+  const circleIntersect = (x1, y1, r1, x2, y2, r2) => {
+    let squareDistance = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
+    return squareDistance <= ((r1 + r2) * (r1 + r2))
+  }
+
+  const detectCollision = () => {
+    /** @type {GameObject}*/
+    let goA;
+    /** @type {GameObject}*/
+    let goB;
+
+    gameObjects.forEach((go, i) => {
+      go.isColliding = false;
+
+      goA = go;
+      for (let j = i + 1; j < gameObjects.length; j++) {
+        goB = gameObjects[j];
+
+        if ((goA.tag === 'egg' || goB.tag === 'egg') && circleIntersect(goA.x, goA.y, goA.radius, goB.x, goB.y, goB.radius)) {
+          if (goA.tag === 'bullet') {
+            goA.visible = false;
+            goA.setData('active', false);
+          } else {
+            goB.visible = false;
+            goB.setData('active', false);
+          }
+        }
+
+        if (goA?.visible && goB?.visible && circleIntersect(goA.x, goA.y, goA.radius, goB.x, goB.y, goB.radius)) {
+          goA.isColliding = true;
+          goB.isColliding = true;
+
+          if ((goA.tag === 'player' && goB.tag === 'enemy') || (goA.tag === 'enemy' && goB.tag === 'player')) {
+            player.setSprite(imageManager.get('toped-hurt'));
+          }
+
+          if ((goA.tag === 'bullet' && goB.tag === 'enemy') || (goA.tag === 'enemy' && goB.tag === 'bullet')) {
+            goA.visible = false;
+            goB.visible = false;
+            gameScore += 1;
+            console.log('Score:', gameScore);
+          }
+
+          if ((goA.tag === 'bullet' && goB.tag === 'egg') || (goA.tag === 'egg' && goB.tag === 'bullet')) {
+            if (goA.tag === 'bullet') {
+              goA.visible = false;
+            } else {
+              goB.visible = false;
+            }
+          }
+        }
+      }
+    });
+  }
+
   const gameLoop = (timeStamp) => {
     timePassed = (timeStamp - prevTimeStamp) / 1000;
-    timePassed = Math.min(timePassed, 0.1); // Correction hardware limit
+    timePassed = Math.min(timePassed, 0.1); // Correction limit
     prevTimeStamp = timeStamp;
 
     fps = Math.round(1 / timePassed);
 
     update(timePassed);
+    detectCollision();
+
+    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Background
@@ -247,7 +305,7 @@ const ProtectEggGame = () => {
     // Draw Tut
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
-    ctx.font = '21px Arial';
+    ctx.font = '18px Arial';
     ctx.textBaseline = 'bottom';
     ctx.fillText('Use ArrowLeft - ArrowRight or A - D to Move', centerX, canvas.height - 25);
     ctx.fillText('Use Space or Click to Shoot', centerX, canvas.height);
