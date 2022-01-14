@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.hide {
+  display: none;
+}
+.car {
+  height: 120px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 10px;
+  width: 50px;
+  position: absolute;
+  bottom: 120px;
+  background: url(./assets/my_car.png);
+  background-repeat: no-repeat;
+  background-size: 50px 120px;
+}
+.mainWrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  background-image: linear-gradient(
+      90deg,
+      transparent 79px,
+      #abced4 0,
+      #abced4 81px,
+      transparent 0
+    ),
+    linear-gradient(#eee 0.1em, transparent 0);
+  background-size: 100% 1.2em;
+  position: relative;
+}
+.lines {
+  width: 10px;
+  height: 100px;
+  background: white;
+  position: absolute;
+  margin-left: 50%;
+}
+.gameArea {
+  height: 100vh;
+  width: 60%;
+  background: #2c3456;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  border-right: 7px dashed #c8d6e5;
+  border-left: 7px dashed #c8d6e5;
+}
+.enemy {
+  height: 100px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  width: 50px;
+  position: absolute;
+  bottom: 120px;
+  background: url(./assets/enemy_car.png);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  background-repeat: no-repeat;
+  background-size: 50px 100px;
+}
+.dashboard {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  background: #10ac84;
+  widows: 300px;
+  min-width: 140px;
+  min-height: 75px;
+  text-align: center;
+  font-size: 1.5em;
+  color: white;
+  font-family: fantasy;
+  box-shadow: 0 5px 5px #777;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+  z-index: 1;
+}
+.startScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #ee5253;
+  transform: translate(-50%, -50%);
+  color: white;
+  z-index: 1;
+  text-align: center;
+  border: 1px solid #ff6b6b;
+  padding: 15px;
+  margin: auto;
+  width: 50%;
+  cursor: pointer;
+  font-family: carfont;
+  letter-spacing: 5;
+  font-size: 20px;
+  word-spacing: 3;
+  line-height: 30px;
+  text-transform: upper;
+  box-shadow: 0 5px 5px #777;
+}
+
+.btn {
+  display: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #afabab8a;
+  position: absolute;
+  box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px,
+    rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px,
+    rgb(0 0 0 / 9%) 0px -3px 5px;
+  z-index: 1;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.leftBtn {
+  bottom: 25%;
+  left: 5%;
+}
+
+.rightBtn {
+  bottom: 25%;
+  right: 5%;
+}
+
+.disable-dbl-tap-zoom {
+  touch-action: manipulation;
+}
+
+@media only screen and (max-width: 800px) {
+  .btn {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .gameArea {
+    width: 80%;
+  }
+}
