@@ -15,6 +15,7 @@ const Card = ({ click, close, complete, framework }) => {
       <div className="front">?</div>
       <div className="back">
         <img
+          alt="img"
           src={
             "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/" +
             framework +
