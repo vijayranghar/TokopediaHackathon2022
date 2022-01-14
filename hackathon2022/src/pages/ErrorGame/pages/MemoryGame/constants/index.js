@@ -2,38 +2,38 @@ export const levels = {
   1: {
     number: 1,
     message: "",
-    time: 100000,
-    totalClicks: 25,
+    time: undefined,
+    totalClicks: undefined,
     totalImages: 4,
     bonus: 10,
-    color: "#03AC0E"  // 03AC0E // 519259
+    color: "#5CDB95"  // 03AC0E // 519259
   },
   2: {
     number: 2,
     message: "",
-    time: 20,
-    totalClicks: 20,
+    time: undefined,
+    totalClicks: undefined,
     totalImages: 8,
-    bonus: 10,
-    color: "#c00"
+    bonus: 20,
+    color: "#05386B"
   },
   3: {
     number: 3,
     message: "",
-    time: 20,
-    totalClicks: 30,
+    time: undefined,
+    totalClicks: 64,
     totalImages: 8,
-    bomus: 50,
-    color: "#c00"
+    bonus: 50,
+    color: "#8D8741"
   },
   4: {
     number: 4,
     message: "",
-    time: 30,
-    totalClicks: 40,
+    time: 300,
+    totalClicks: 64,
     totalImages: 8,
-    bomus: 100,
-    color: "#c00"
+    bonus: 100,
+    color: "#553D67"
   }
 };
 
