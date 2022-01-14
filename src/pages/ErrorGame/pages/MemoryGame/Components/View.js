@@ -14,6 +14,7 @@ import {
 import { ACTION_TYPES, INITIAL_STATE, reducer } from "../reducer";
 import LevelComplete from "./LevelComplete";
 import LevelFailed from "./LevelFailed";
+import eggImage from '../assets/eggImage3.png';
 
 const PlayGround = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
@@ -204,7 +205,10 @@ const PlayGround = () => {
           <p>
             Level: {currentLevel}/{totalLevelsInGame}
           </p>
-          <p>Energy: {energy}</p>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <p>Energy: {energy}</p>
+            <img src={eggImage} id="eggImage" />
+          </div>
         </div>
         <div className="box">
           {timeTrack ? <p>Time {convertSecondsToTime(time)}</p> : null}
