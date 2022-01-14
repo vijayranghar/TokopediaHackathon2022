@@ -1,0 +1,25 @@
+.recharge-wrapper {
+      /* position: relative; */
+  display: block;
+  box-shadow: 0 1px 6px 0 rgb(49 53 59 / 12%);
+  background-color: #fff;
+  padding: 16px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.recharge-wrapper h2 {
+    margin-bottom: 15px;
+}
+.philian img {
+    border: solid 0.5px #e5e7e9;
+    border-radius: 10px;
+    max-width: 120px;
+    margin: 0 8px;
+}

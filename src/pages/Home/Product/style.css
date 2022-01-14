@@ -1,0 +1,8 @@
+.productContainer {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.productContainer img {
+    width: 100%;
+}
