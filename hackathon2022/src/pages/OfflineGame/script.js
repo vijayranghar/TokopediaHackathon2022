@@ -2,18 +2,19 @@ const score = document.querySelector(".score");
 const speed = document.querySelector(".speed");
 const startScreen = document.querySelector(".startScreen");
 const gameArea = document.querySelector(".gameArea");
-startScreen.addEventListener("click", start);
+const gameHeight = gameArea.offsetHeight;
+const gameWidth = gameArea.offsetWidth;
 const speedIncreasePoint = 1000;
 const startScore = 0;
 const startSpeed = 5;
-const gameHeight = document.querySelector(".gameArea").offsetHeight;
-const gameWidth = document.querySelector(".gameArea").offsetWidth;
 let player = { speed: startSpeed, score: startScore };
 let keys = {
   ArrowLeft: false,
   ArrowRight: false,
 };
 
+// addEventListener added
+startScreen.addEventListener("click", start);
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
 
@@ -37,6 +38,9 @@ document.getElementById("rightBtn").addEventListener("touchend", (e) => {
   keys["ArrowRight"] = false;
 });
 
+// End addEventListener
+
+// Game function start
 function keyDown(e) {
   e.preventDefault();
   keys[e.key] = true;
@@ -67,6 +71,7 @@ function moveLines() {
     item.style.top = item.y + "px";
   });
 }
+
 function endGame() {
   player.start = false;
   startScreen.classList.remove("hide");
@@ -76,11 +81,11 @@ function endGame() {
     " " +
     "<br>Press again to restar";
 }
+
 function moveEnemy(car) {
   let enemy = document.querySelectorAll(".enemy");
   enemy.forEach(function (item) {
     if (isCollide(car, item)) {
-      console.log("Bang!");
       endGame();
     }
     if (item.y >= gameHeight) {
