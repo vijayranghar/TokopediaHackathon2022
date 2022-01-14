@@ -3,7 +3,7 @@ export const levels = {
   1: {
     number: 1,
     message: '',
-    time: 20,
+    time: 25,
     totalClicks: 10,
     totalImages: 4,
     bonus: 10

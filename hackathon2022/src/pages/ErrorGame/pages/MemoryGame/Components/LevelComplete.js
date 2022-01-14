@@ -20,13 +20,14 @@ function LevelComplete({ dispatch, currentLevel, closeModal, clicks, time }) {
   }
 
   return (
-    <div>
-      <h1>Congratulation!! You Win</h1>
+    <div className='levels'>
+      <h1>Congratulation!!</h1>
+      <h2>You Win</h2>
       <p>Get {levels[currentLevel + 1].bonus} more energy in next level</p>
       <p>Clicks : {clicks}</p>
       <p>Time: {convertSecondsToTime(time)}</p>
-      <button onClick={() => handleLevels(true)}>Play Again</button>
-      <button onClick={() => handleLevels(false)}>Play Next Level</button>
+      <button className="button-one btn1" onClick={() => handleLevels(true)}><span>Play Again</span></button>
+      <button className="button-one btn2" onClick={() => handleLevels(false)}>Play Next Level</button>
     </div>
   )
 }

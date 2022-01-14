@@ -19,13 +19,13 @@ function LevelFailed({ dispatch, LevelFailed, closeModal, currentLevel, clicks, 
     closeModal();
   };
   return (
-    <div>
+    <div className='levels'>
       <h1>Game Over</h1>
       <p>Play again to get more energy and rewards</p>
       <p>Clicks : {clicks}</p>
       <p>Time: {convertSecondsToTime(time)}</p>
-      <button onClick={() => handleLevels(true)}>Play previous Level</button>
-      <button onClick={() => handleLevels(false)}>Play Again</button>
+      <button className="button-one btn1" onClick={() => handleLevels(true)}>Play previous Level</button>
+      <button className="button-one btn2" onClick={() => handleLevels(false)}>Play Again</button>
     </div>
   )
 }
