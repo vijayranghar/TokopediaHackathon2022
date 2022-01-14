@@ -3,7 +3,7 @@ import React from 'react'
 function Memory() {
   return (
     <div>
-        Hello memory
+        Hello memory check
     </div>
   )
 }
