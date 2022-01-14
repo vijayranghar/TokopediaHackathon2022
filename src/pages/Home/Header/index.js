@@ -1,5 +1,6 @@
 import React from "react";
 import './style.css'
+import { Link } from 'react-router-dom';
 
 const Header = () => (
     <div className="header">
@@ -21,13 +22,14 @@ const Header = () => (
                 <img alt="tokopedia-logo" src="https://ecs7.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/e5b8438b.svg"/>
             </a>
             <div>Kategori</div>
-            <div className="searchbar">
+            {/* <div className="searchbar">
                 <input type="text"/>
                 <button/>
-            </div>
+            </div> */}
             <div className="buttonWrapper">
-                <button type="button" className="login">Masuk</button>
-                <button type="button" className="register">Daftar</button>
+                <Link to='/offline' type="button" className="login">Internet Offline</Link>
+                <Link to='/error/1' type="button" className="login">Server Error</Link>
+                <Link to='/error/2' type="button" className="register">404</Link>
             </div>
         </div>
         <div id="trending-popular-keywords" className="trending-list">
