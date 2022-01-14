@@ -151,6 +151,7 @@ function start() {
   /*Add My Car;*/
   let car = document.createElement("div");
   car.setAttribute("class", "car");
+  car.style.backgroundColor = randomColor();
   gameArea.appendChild(car);
 
   player.x = car.offsetLeft;
