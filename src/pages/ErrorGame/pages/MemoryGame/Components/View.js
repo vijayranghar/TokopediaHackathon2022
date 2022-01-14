@@ -132,7 +132,7 @@ const PlayGround = () => {
           type: ACTION_TYPES.DO_OPERATION,
           payload: {
             allImages: updatedImages,
-            ...(clickTrack && { clicks: clicks + 1 })
+            clicks: clicks + 1
           }
         });
       }, 750);
@@ -147,7 +147,7 @@ const PlayGround = () => {
   useEffect(() => {
     if (
       currentLevelsTrack &&
-      currentLevelsTrack / currentLevel - allImages.length / 2 === 0
+      (currentLevelsTrack === (allImages.length / 2))
     ) {
       dispatch({
         type: ACTION_TYPES.DO_OPERATION,
@@ -158,11 +158,12 @@ const PlayGround = () => {
         }
       });
     }
-    if (currentLevelsTrack && currentLevelsTrack % 10 === 0)
+    if (currentScore && (currentScore % 10 === 0)) {
       dispatch({
         type: ACTION_TYPES.DO_OPERATION,
-        payload: { energy: energy + 1 }
+        payload: { energy: energy + 5, currentScore: currentScore + 1 },
       });
+    }
   }, [currentLevelsTrack, allImages.length, currentLevel, energy]);
 
   // On level completion
