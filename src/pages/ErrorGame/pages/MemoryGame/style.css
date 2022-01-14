@@ -205,6 +205,11 @@ h1 {
   animation-timing-function: ease-in-out;
  }
 
+ @media (max-width: 480px) {
+  #eggImage {
+    width: 20px;
+  }
+}
  @keyframes egg {
    0% {
      border-color: red; transform: scale(1);
