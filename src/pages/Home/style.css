@@ -1,0 +1,9 @@
+.download {
+    width: 20px;
+    height: 20px;
+    background-image: url(https://assets.tokopedia.net/assets-tokopedia-lite/v2/zeus/kratos/413cd754.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 60% 60%;
+    display: inline-block;
+}

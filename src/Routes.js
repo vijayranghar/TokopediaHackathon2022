@@ -6,8 +6,6 @@ import ErrorGame from './pages/ErrorGame';
 
 
 const Routes = () => {
-  const isLoggedIn = false;
-
   return (
     <Switch>
       <Route path="/" exact component={Home} />

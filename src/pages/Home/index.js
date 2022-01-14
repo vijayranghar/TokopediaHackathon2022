@@ -1,9 +1,12 @@
 import React from 'react'
+import './style.css'
 
 function HomePage() {
   return (
     <div>
-        Home Page
+        <div className="nabar">
+          <span className='download'/>
+        </div>
     </div>
   )
 }
