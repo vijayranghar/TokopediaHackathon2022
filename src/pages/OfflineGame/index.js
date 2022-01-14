@@ -7,7 +7,7 @@ import "./style.css";
 
 const speedIncreasePoint = 2000;
 const startScore = 0;
-const startSpeed = 1;
+const startSpeed = 5;
 const keys = {
   ArrowLeft: false,
   ArrowRight: false,
