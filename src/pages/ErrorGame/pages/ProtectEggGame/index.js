@@ -12,6 +12,7 @@ import Header from '../MemoryGame/Header';
 import Player from './components/Player';
 import eggImg from './assets/egg.png';
 import footerImg from './assets/misc/footer.png';
+import overlayImg from './assets/misc/bgOverlay.png';
 import pikoAttackImg from './assets/piko_2.png';
 import pikoSusImg from './assets/piko_1.png';
 import topedAttackImg from './assets/toped_2.png';
@@ -35,7 +36,6 @@ const ProtectEggGame = () => {
 
   let timePassed = 0;
   let prevTimeStamp = 0;
-  let fps = 0;
 
   /** @type {Map<string, Image>} */
   const imageManager = new Map();
@@ -44,8 +44,6 @@ const ProtectEggGame = () => {
   let gameScore = 0;
   const tickPerSecond = 1.25;
   let tick = 1;
-
-  console.log('ga', gameState, showUI);
 
   let justPressSpace = false;
   const tickAddEvent = new Event(eventName.tickAdd);
@@ -203,6 +201,7 @@ const ProtectEggGame = () => {
       { key: 'piko-sus', val: pikoSusImg },
       { key: 'piko-attack', val: pikoAttackImg },
       { key: 'egg', val: eggImg },
+      { key: 'bg-overlay', val: overlayImg },
     ];
     assets.forEach(data => {
       const img = new Image();
@@ -314,8 +313,6 @@ const ProtectEggGame = () => {
     timePassed = Math.min(timePassed, 0.1); // Correction limit
     prevTimeStamp = timeStamp;
 
-    fps = Math.round(1 / timePassed);
-
     update(timePassed);
     detectCollision();
 
@@ -328,28 +325,29 @@ const ProtectEggGame = () => {
 
     render(timePassed);
 
+    ctx.drawImage(imageManager.get('bg-overlay'), 0, 0);
+
     // Draw FPS
     ctx.fillStyle = 'black';
-    ctx.textAlign = 'end';
+    ctx.textAlign = 'start'
     ctx.font = '16px Arial';
     ctx.textBaseline = 'top';
-    ctx.fillText("FPS: " + fps.toString(), canvas.width - 16, 8);
 
     // Draw Tut
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
     ctx.font = '18px Arial';
     ctx.textBaseline = 'bottom';
-    ctx.fillText('Use ArrowLeft - ArrowRight or A - D to Move', centerX, canvas.height - 32);
-    ctx.fillText('Use Space or Click to Shoot', centerX, canvas.height - 8);
+    ctx.fillText('Use ArrowLeft - ArrowRight or A - D to Move', centerX, canvas.height - 36);
+    ctx.fillText('Use Space or Click to Shoot', centerX, canvas.height - 16);
 
     // Score
     ctx.font = '18px Arial';
-    ctx.fillText('SCORE', centerX, 32);
+    ctx.fillText('SCORE', centerX, 38);
 
-    ctx.font = '32px Arial';
+    ctx.font = '38px Arial';
     ctx.textBaseline = 'top';
-    ctx.fillText(gameScore, centerX, 38);
+    ctx.fillText(gameScore, centerX, 42);
 
 
     requestAnimFrameRef.current = requestAnimationFrame(gameLoop);
