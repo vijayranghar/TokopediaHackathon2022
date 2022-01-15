@@ -1,7 +1,7 @@
 import './style.css';
 
-import React, { useEffect, useRef } from 'react';
-import { centerX, centerY, eventName } from './constant';
+import { GAME_STATE, centerX, centerY, eventName } from './constant';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Bullet from './components/Bullet';
 import Egg from './components/Egg';
@@ -19,6 +19,7 @@ import topedIdleImg from './assets/toped_1.png';
 const ProtectEggGame = () => {
   const canvasRef = useRef(null);
   const requestAnimFrameRef = useRef(null);
+  const [showUI, setShowUI] = useState(true);
 
   /** @type {HTMLCanvasElement} */
   let canvas;
@@ -34,11 +35,9 @@ const ProtectEggGame = () => {
   /** @type {Map<string, Image>} */
   const imageManager = new Map();
 
-  /** @type {number}*/
+  let gameState = GAME_STATE.PREPARE;
   let gameScore = 0;
-  /** @type {number}*/
   const tickPerSecond = 1.25;
-  /** @type {number}*/
   let tick = 1;
 
   let justPressSpace = false;
@@ -149,6 +148,8 @@ const ProtectEggGame = () => {
     //#region Player Action
     let clickTimeoutID = null;
     canvas.addEventListener('click', () => {
+      if (gameState !== GAME_STATE.PLAY) return;
+
       clearTimeout(clickTimeoutID);
       clickTimeoutID = setTimeout(() => player.setSprite(imageManager.get('toped-idle')), 500);
 
@@ -156,6 +157,8 @@ const ProtectEggGame = () => {
     });
 
     window.addEventListener("keydown", e => {
+      if (gameState !== GAME_STATE.PLAY) return;
+
       if (e.code === 'Space') {
         if (!justPressSpace) {
           playerShoot();
@@ -206,6 +209,8 @@ const ProtectEggGame = () => {
   };
 
   const update = (deltaTime) => {
+    if (gameState !== GAME_STATE.PLAY) return;
+
     if (tick <= 0) {
       tick += tickPerSecond * (Math.random() * 2);
       window.dispatchEvent(tickAddEvent);
@@ -261,7 +266,6 @@ const ProtectEggGame = () => {
             goA.visible = false;
             goB.visible = false;
             gameScore += 1;
-            console.log('Score:', gameScore);
           }
 
           if ((goA.tag === 'bullet' && goB.tag === 'egg') || (goA.tag === 'egg' && goB.tag === 'bullet')) {
@@ -307,12 +311,25 @@ const ProtectEggGame = () => {
     ctx.textAlign = 'center';
     ctx.font = '18px Arial';
     ctx.textBaseline = 'bottom';
-    ctx.fillText('Use ArrowLeft - ArrowRight or A - D to Move', centerX, canvas.height - 25);
-    ctx.fillText('Use Space or Click to Shoot', centerX, canvas.height);
+    ctx.fillText('Use ArrowLeft - ArrowRight or A - D to Move', centerX, canvas.height - 32);
+    ctx.fillText('Use Space or Click to Shoot', centerX, canvas.height - 8);
+
+    // Score
+    ctx.font = '18px Arial';
+    ctx.fillText('SCORE', centerX, 32);
+
+    ctx.font = '32px Arial';
+    ctx.textBaseline = 'top';
+    ctx.fillText(gameScore, centerX, 38);
 
 
     requestAnimFrameRef.current = requestAnimationFrame(gameLoop);
   }
+
+  const handleClickPlay = () => {
+    setShowUI(false);
+    gameState = GAME_STATE.PLAY;
+  };
 
   useEffect(() => {
     initialize();
@@ -324,6 +341,11 @@ const ProtectEggGame = () => {
   return (
     <div className="protectEggGameWrapper">
       <canvas id="game-canvas" ref={canvasRef} width={512} height={512} />
+      <div className="ui">
+        {
+          showUI && <button className="playBtn" onClick={handleClickPlay}>Mulai berjaga!</button>
+        }
+      </div>
     </div>
   )
 }
