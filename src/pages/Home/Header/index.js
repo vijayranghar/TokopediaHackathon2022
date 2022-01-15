@@ -1,6 +1,7 @@
 import React from "react";
 import './style.css'
 import { Link } from 'react-router-dom';
+import { shuffleArray } from '../../ErrorGame/pages/MemoryGame/constants'
 
 const Header = () => (
     <div className="header">
@@ -27,9 +28,8 @@ const Header = () => (
                 <button/>
             </div> */}
             <div className="buttonWrapper">
-                <Link to='/offline' type="button" className="login">Internet Offline</Link>
-                <Link to='/error/1' type="button" className="login">Server Error</Link>
-                <Link to='/error/2' type="button" className="register">404</Link>
+                <Link to='/offline' type="button" className="login">Offline</Link>
+                <Link to={`${shuffleArray(['/error/1', 'error/2'])[0]}`} type="button" className="register">Server Error</Link>
             </div>
         </div>
         <div id="trending-popular-keywords" className="trending-list">

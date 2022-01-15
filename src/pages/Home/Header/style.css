@@ -160,7 +160,7 @@
     text-decoration: none;
 }
 .login {
-    width: 72px;
+    width: 100px;
     height: 36px;
     padding: 0px 16px;
     font-weight: 800;
@@ -171,6 +171,9 @@
     cursor: pointer;
     border: 1px solid rgb(3,172,14);
     margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .logo + div {
     font-size: 12px;
@@ -179,7 +182,7 @@
     color: rgba(0,0,0,.54);
 }
 .register {
-    width: 72px;
+    width: 100px;
     height: 36px;
     color: white;
     padding: 0px 16px;

@@ -8,7 +8,7 @@ import Egg from './components/Egg';
 import Enemy from './components/Enemy';
 // eslint-disable-next-line no-unused-vars
 import GameObject from './components/GameObject';
-import Header from '../../../Home/Header';
+import Header from '../MemoryGame/Header';
 import Player from './components/Player';
 import eggImg from './assets/egg.png';
 import footerImg from './assets/misc/footer.png';
@@ -374,7 +374,7 @@ const ProtectEggGame = () => {
 
   return (
     <>
-      <Header />
+      <Header errorNo={1} />
       <div className="protectEggGameWrapper">
         <canvas id="game-canvas" ref={canvasRef} width={512} height={512} />
         <div className="ui">

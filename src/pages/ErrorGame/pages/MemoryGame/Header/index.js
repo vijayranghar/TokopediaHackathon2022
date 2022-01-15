@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ errorNo }) {
   return (
     <div>
       <div className="searchbar-wrapper">
@@ -9,7 +9,7 @@ function Header() {
           <img alt="tokopedia-logo" src="https://ecs7.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/e5b8438b.svg"/>
       </a>
       <div className="buttonWrapper">
-          <Link to='/error/2' type="button" className="register">Next Game</Link>
+          <Link to={`/error/${errorNo}`} type="button" className="register">Next Game</Link>
       </div>
         </div>
     </div>
