@@ -58,7 +58,7 @@ const ProtectEggGame = () => {
     player.setTag('player');
 
     egg = new Egg(ctx, centerX, centerY, 16);
-    egg.setTag('egg').setData('life', 1);
+    egg.setTag('egg').setData('life', 4);
 
     const playerShoot = () => {
       player.setSprite(imageManager.get('toped-attack'));
