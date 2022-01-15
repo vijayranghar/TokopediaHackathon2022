@@ -1,0 +1,31 @@
+.protectEggGameWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#game-canvas {
+  align-items: center;
+  touch-action: manipulation;
+}
+
+.ui {
+  position: absolute;
+  height: 512px;
+}
+
+.playBtn {
+  position: relative;
+  padding: 8px 16px;
+  top: 70%;
+  border-radius: 8px;
+  border: none;
+  background-color: #03AC0E;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lose {
+  background-color: #e67e22;
+}
