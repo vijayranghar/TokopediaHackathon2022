@@ -8,8 +8,10 @@ import Egg from './components/Egg';
 import Enemy from './components/Enemy';
 // eslint-disable-next-line no-unused-vars
 import GameObject from './components/GameObject';
+import Header from '../../../Home/Header';
 import Player from './components/Player';
 import eggImg from './assets/egg.png';
+import footerImg from './assets/misc/footer.png';
 import pikoAttackImg from './assets/piko_2.png';
 import pikoSusImg from './assets/piko_1.png';
 import topedAttackImg from './assets/toped_2.png';
@@ -169,6 +171,12 @@ const ProtectEggGame = () => {
           playerShoot();
           justPressSpace = true;
         }
+      }
+
+      // Prevet scroll space
+      if (e.code === 'Space' && e.target === document.body) {
+        e.preventDefault();
+        return false;
       }
     });
 
@@ -365,14 +373,18 @@ const ProtectEggGame = () => {
   }, []);
 
   return (
-    <div className="protectEggGameWrapper">
-      <canvas id="game-canvas" ref={canvasRef} width={512} height={512} />
-      <div className="ui">
-        {
-          showUI && <button className={`playBtn${isGameover ? ' lose' : ''}`} onClick={handleClickPlay}>{buttonText}</button>
-        }
+    <>
+      <Header />
+      <div className="protectEggGameWrapper">
+        <canvas id="game-canvas" ref={canvasRef} width={512} height={512} />
+        <div className="ui">
+          {
+            showUI && <button className={`playBtn${isGameover ? ' lose' : ''}`} onClick={handleClickPlay}>{buttonText}</button>
+          }
+        </div>
       </div>
-    </div>
+      <img className="footerImg" src={footerImg} alt="" />
+    </>
   )
 }
 
