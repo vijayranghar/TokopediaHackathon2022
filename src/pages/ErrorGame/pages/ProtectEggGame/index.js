@@ -13,6 +13,7 @@ import eggImg from './assets/egg.png';
 import pikoAttackImg from './assets/piko_2.png';
 import pikoSusImg from './assets/piko_1.png';
 import topedAttackImg from './assets/toped_2.png';
+import topedExcitedImg from './assets/toped_4.png';
 import topedHurtImg from './assets/toped_3.png';
 import topedIdleImg from './assets/toped_1.png';
 
@@ -20,6 +21,8 @@ const ProtectEggGame = () => {
   const canvasRef = useRef(null);
   const requestAnimFrameRef = useRef(null);
   const [showUI, setShowUI] = useState(true);
+  const [isGameover, setIsGameover] = useState(false);
+  const [buttonText, setButtonText] = useState('Mulai berjaga!');
 
   /** @type {HTMLCanvasElement} */
   let canvas;
@@ -40,6 +43,8 @@ const ProtectEggGame = () => {
   const tickPerSecond = 1.25;
   let tick = 1;
 
+  console.log('ga', gameState, showUI);
+
   let justPressSpace = false;
   const tickAddEvent = new Event(eventName.tickAdd);
 
@@ -53,7 +58,7 @@ const ProtectEggGame = () => {
     player.setTag('player');
 
     egg = new Egg(ctx, centerX, centerY, 16);
-    egg.setTag('egg');
+    egg.setTag('egg').setData('life', 1);
 
     const playerShoot = () => {
       player.setSprite(imageManager.get('toped-attack'));
@@ -90,18 +95,18 @@ const ProtectEggGame = () => {
         switch (spawnDir) {
         case 1: // Top
           pos.x = Math.round(Math.random() * 500); // 0..500
-          pos.y = Math.round(Math.random() * -50);
+          pos.y = Math.round(Math.random() * -150);
           break;
         case 2: // Right
-          pos.x = 500 + Math.round(Math.random() * 50);
+          pos.x = 500 + Math.round(Math.random() * 150);
           pos.y = Math.round(Math.random() * 500);
           break;
         case 3: // Bot
           pos.x = Math.round(Math.random() * 500);
-          pos.y = 500 + Math.round(Math.random() * 100); // 500..600
+          pos.y = 500 + Math.round(Math.random() * 150); // 500..600
           break;
         case 4: // Left
-          pos.x = Math.round(Math.random() * -50); // -100..0
+          pos.x = Math.round(Math.random() * -150); // -100..0
           pos.y = Math.round(Math.random() * 500);
           break;
         default:
@@ -186,6 +191,7 @@ const ProtectEggGame = () => {
       { key: 'toped-idle', val: topedIdleImg },
       { key: 'toped-attack', val: topedAttackImg },
       { key: 'toped-hurt', val: topedHurtImg },
+      { key: 'toped-excited', val: topedExcitedImg },
       { key: 'piko-sus', val: pikoSusImg },
       { key: 'piko-attack', val: pikoAttackImg },
       { key: 'egg', val: eggImg },
@@ -216,6 +222,14 @@ const ProtectEggGame = () => {
       window.dispatchEvent(tickAddEvent);
     }
     tick -= deltaTime;
+
+    // Gameover handler
+    if (egg.getData('life') <= 0) {
+      gameState = GAME_STATE.GAMEOVER;
+      setShowUI(true);
+      setIsGameover(true);
+      setButtonText('Yah! Semua telur hilang :(');
+    }
 
     gameObjects.forEach(go => {
       go.update(deltaTime);
@@ -248,9 +262,16 @@ const ProtectEggGame = () => {
           if (goA.tag === 'bullet') {
             goA.visible = false;
             goA.setData('active', false);
-          } else {
+          } else if (goB.visible) {
             goB.visible = false;
             goB.setData('active', false);
+
+            const eggLeft = egg.getData('life');
+            const eggCurr = eggLeft - 1;
+            if (eggCurr >= 0) {
+              egg.setData('life', eggCurr);
+            }
+            console.log(eggCurr);
           }
         }
 
@@ -268,8 +289,8 @@ const ProtectEggGame = () => {
             gameScore += 1;
           }
 
-          if ((goA.tag === 'bullet' && goB.tag === 'egg') || (goA.tag === 'egg' && goB.tag === 'bullet')) {
-            if (goA.tag === 'bullet') {
+          if ((goA.tag === 'enemy' && goB.tag === 'egg') || (goA.tag === 'egg' && goB.tag === 'enemy')) {
+            if (goA.tag === 'enemy') {
               goA.visible = false;
             } else {
               goB.visible = false;
@@ -327,8 +348,13 @@ const ProtectEggGame = () => {
   }
 
   const handleClickPlay = () => {
+    if (isGameover) {
+      window.location.reload();
+      return;
+    }
     setShowUI(false);
     gameState = GAME_STATE.PLAY;
+    player.setSprite(imageManager.get('toped-excited'));
   };
 
   useEffect(() => {
@@ -343,7 +369,7 @@ const ProtectEggGame = () => {
       <canvas id="game-canvas" ref={canvasRef} width={512} height={512} />
       <div className="ui">
         {
-          showUI && <button className="playBtn" onClick={handleClickPlay}>Mulai berjaga!</button>
+          showUI && <button className={`playBtn${isGameover ? ' lose' : ''}`} onClick={handleClickPlay}>{buttonText}</button>
         }
       </div>
     </div>

@@ -21,7 +21,11 @@
   border: none;
   background-color: #03AC0E;
   color: rgb(255, 255, 255);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.lose {
+  background-color: #e67e22;
 }
