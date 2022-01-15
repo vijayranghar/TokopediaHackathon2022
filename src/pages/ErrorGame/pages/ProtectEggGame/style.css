@@ -1,6 +1,7 @@
 .protectEggGameWrapper {
   display: flex;
   justify-content: center;
+  margin-top: 4px;
 }
 
 #game-canvas {
